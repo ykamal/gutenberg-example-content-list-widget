@@ -18,11 +18,21 @@
 	"render": "file:./render.php",
 	"viewScript": "file:./view.js",
 	"attributes": {
-		"title": {
+		"blockTitle": {
 			"type": "string",
-			"source": "text",
-			"selector": "h3.block-title",
 			"default": ""
+		},
+		"perPage": {
+			"type": "number",
+			"default": "10"
+		},
+		"postTypes": {
+			"type": "array",
+			"default": []
+		},
+		"excludedPosts": {
+			"type": "array",
+			"default": []
 		}
 	}
 }

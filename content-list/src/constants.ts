@@ -1,0 +1,1 @@
+export const TEXT_DOMAIN = 'yk-content-list'

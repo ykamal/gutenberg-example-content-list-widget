@@ -1,1 +1,12 @@
-@import url('./global.scss');
+@import './global.scss';
+
+.yk-content-list-form {
+    padding: 20px 40px;
+    background-color: beige;
+    border-radius: 8px;
+
+    h2.components-heading {
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+}
