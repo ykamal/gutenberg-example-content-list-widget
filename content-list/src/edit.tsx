@@ -16,6 +16,7 @@ import { TEXT_DOMAIN } from "./constants";
 import { fetchPostTypes, fetchPosts } from "./utils/apiFetch";
 
 export default function Edit({ attributes, setAttributes, isSelected }) {
+	console.log({ attributes });
 	const [postTypeBusy, setPostTypeBusy] = useState(false);
 	const [wpPostsBusy, setWpPostsBusy] = useState(false);
 
@@ -31,6 +32,18 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 	const [postSearchInput, setPostSearchInput] = useState("");
 	const [debouncedPostSearchInput, setDebouncedPostSearchInput] = useState("");
 	const [perPage, setPerPage] = useState(attributes.perPage);
+	const [orderBy, setOrderBy] = useState(attributes.orderBy);
+	const [order, setOrder] = useState(attributes.order);
+
+	const orderByOptions = [
+		{ label: "Name", value: "name" },
+		{ label: "Publishing Date", value: "date" },
+	];
+
+	const orderOptions = [
+		{ label: "Ascending", value: "ASC" },
+		{ label: "Descending", value: "DESC" },
+	];
 
 	useEffect(() => {
 		const debounceTimer = setTimeout(() => {
@@ -54,8 +67,10 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 			postTypes,
 			blockTitle,
 			excludedPosts,
+			orderBy,
+			order,
 		});
-	}, [blockTitle, postTypes, excludedPosts, perPage]);
+	}, [blockTitle, postTypes, excludedPosts, perPage, orderBy, order]);
 
 	useEffect(() => {
 		setWpPostsBusy(true);
@@ -80,6 +95,20 @@ export default function Edit({ attributes, setAttributes, isSelected }) {
 				step={5}
 				value={perPage}
 				onChange={(value) => setPerPage(parseInt(value))}
+			/>
+
+			<SelectControl
+				label={__("Order By", TEXT_DOMAIN)}
+				value={orderBy}
+				options={orderByOptions}
+				onChange={(val) => setOrderBy(val)}
+			/>
+
+			<SelectControl
+				label={__("Order", TEXT_DOMAIN)}
+				value={order}
+				options={orderOptions}
+				onChange={(val) => setOrder(val)}
 			/>
 
 			<SelectControl

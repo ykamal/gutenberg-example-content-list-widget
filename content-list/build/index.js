@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   TEXT_DOMAIN: () => (/* binding */ TEXT_DOMAIN)
 /* harmony export */ });
-const TEXT_DOMAIN = 'yk-content-list';
+const TEXT_DOMAIN = "content-list";
 
 /***/ }),
 
@@ -53,6 +53,9 @@ function Edit({
   setAttributes,
   isSelected
 }) {
+  console.log({
+    attributes
+  });
   const [postTypeBusy, setPostTypeBusy] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
   const [wpPostsBusy, setWpPostsBusy] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(false);
   const [wpPostTypes, setWPPostTypes] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)([]);
@@ -65,6 +68,22 @@ function Edit({
   const [postSearchInput, setPostSearchInput] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)("");
   const [debouncedPostSearchInput, setDebouncedPostSearchInput] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)("");
   const [perPage, setPerPage] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(attributes.perPage);
+  const [orderBy, setOrderBy] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(attributes.orderBy);
+  const [order, setOrder] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(attributes.order);
+  const orderByOptions = [{
+    label: "Name",
+    value: "name"
+  }, {
+    label: "Publishing Date",
+    value: "date"
+  }];
+  const orderOptions = [{
+    label: "Ascending",
+    value: "ASC"
+  }, {
+    label: "Descending",
+    value: "DESC"
+  }];
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
     const debounceTimer = setTimeout(() => {
       setDebouncedPostSearchInput(postSearchInput);
@@ -82,9 +101,11 @@ function Edit({
       perPage,
       postTypes,
       blockTitle,
-      excludedPosts
+      excludedPosts,
+      orderBy,
+      order
     });
-  }, [blockTitle, postTypes, excludedPosts, perPage]);
+  }, [blockTitle, postTypes, excludedPosts, perPage, orderBy, order]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
     setWpPostsBusy(true);
     (0,_utils_apiFetch__WEBPACK_IMPORTED_MODULE_7__.fetchPosts)(setWPPosts, setWpPostsBusy, postSearchInput, perPage);
@@ -104,6 +125,16 @@ function Edit({
     step: 5,
     value: perPage,
     onChange: value => setPerPage(parseInt(value))
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Order By", _constants__WEBPACK_IMPORTED_MODULE_6__.TEXT_DOMAIN),
+    value: orderBy,
+    options: orderByOptions,
+    onChange: val => setOrderBy(val)
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Order", _constants__WEBPACK_IMPORTED_MODULE_6__.TEXT_DOMAIN),
+    value: order,
+    options: orderOptions,
+    onChange: val => setOrder(val)
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Post Types", _constants__WEBPACK_IMPORTED_MODULE_6__.TEXT_DOMAIN),
     value: postTypes,
@@ -370,7 +401,7 @@ module.exports = window["wp"]["url"];
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"yk-content-list/content-list","version":"0.1.0","title":"Content List","category":"widgets","icon":"list-view","description":"A Gutenberg Block that lets you show a table of your website\'s contents with various controls","example":{},"supports":{"html":false},"textdomain":"content-list","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{"blockTitle":{"type":"string","default":""},"perPage":{"type":"number","default":"10"},"postTypes":{"type":"array","default":[]},"excludedPosts":{"type":"array","default":[]}}}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"yk-content-list/content-list","version":"0.1.0","title":"Content List","category":"widgets","icon":"list-view","description":"A Gutenberg Block that lets you show a table of your website\'s contents with various controls","example":{},"supports":{"html":false},"textdomain":"content-list","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":"file:./view.js","attributes":{"blockTitle":{"type":"string","default":""},"perPage":{"type":"number","default":"10"},"orderBy":{"type":"string","enum":["date","name"],"default":"date"},"order":{"type":"string","enum":["ASC","DESC"],"default":"ASC"},"postTypes":{"type":"array","default":[]},"excludedPosts":{"type":"array","default":[]}}}');
 
 /***/ })
 

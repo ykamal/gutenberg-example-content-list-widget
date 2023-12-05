@@ -1,1 +1,1 @@
-export const TEXT_DOMAIN = 'yk-content-list'
+export const TEXT_DOMAIN = "content-list";

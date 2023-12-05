@@ -26,6 +26,16 @@
 			"type": "number",
 			"default": "10"
 		},
+		"orderBy": {
+			"type": "string",
+			"enum": ["date", "name"],
+			"default": "date"
+		},
+		"order": {
+			"type": "string",
+			"enum": ["ASC", "DESC"],
+			"default": "ASC"
+		},
 		"postTypes": {
 			"type": "array",
 			"default": []
