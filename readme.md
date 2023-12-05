@@ -9,6 +9,10 @@ This is a simple Gutenberg Block that lets you display a list of content from yo
 - Post Type: Restricts posts displayed to that type. Supports custom post type. Ignores meta types.
 - Excluded Posts: Exclude certain posts.
 
+![editor](preview/editor.png)
+
+![render](preview/render.png)
+
 
 ## Development
 
